@@ -11,5 +11,5 @@ int main()
     int n, m;
     cin >> n >> m;
     hd(n, m);
-    cout << n << "\t" << m;
+    cout << n << " " << m;
 }
