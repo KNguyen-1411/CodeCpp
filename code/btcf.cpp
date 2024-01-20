@@ -5,9 +5,9 @@ int kt(ll n)
 {
     if (n == 10)
         return 1;
-    if (n == 10)
+    else if (n == 10)
         return -1;
-    if (abs(n) < 10)
+    else 
         return n;
 }
 inline ll duoi(ll n)
