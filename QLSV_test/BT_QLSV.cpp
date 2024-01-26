@@ -86,6 +86,7 @@ inline namespace operation
     void nhap(vector<string> &textnew)
     {
         cout << "Nhap so luong sinh vien: " << endl;
+        cout << "Cu phap :  ten;tuoi;diem" << endl;
         int n;
         cin >> n;
         cin.ignore();
@@ -144,6 +145,9 @@ inline namespace operation
     void sortten(vector<thuoctinh> &sinhvien)
     {
         cout << "Lu qua chua biet lam :)))" << endl;
+        for (thuoctinh &sv : sinhvien)
+        {
+        }
     }
     void sapxep(vector<thuoctinh> &sinhvien)
     {
@@ -187,8 +191,8 @@ inline namespace operation
         if (n == 1)
         {
             string ten;
-            getline(cin, ten); // Đọc ký tự '\n' sau khi đọc n vào
-            cout << "Nhap ten sinh vien can xoa: ";
+            cout << "Nhap ten sinh vien can xoa: " << endl;
+            cin.ignore();
             getline(cin, ten);
 
             sinhvien.erase(remove_if(sinhvien.begin(), sinhvien.end(), [&ten](const thuoctinh &person)
@@ -330,8 +334,8 @@ inline namespace operation
     }
     void suaSinhVien(vector<thuoctinh> &sinhvien)
     {
+        cout << "Nhap ten sinh vien can sua: " << endl;
         string ten;
-        cout << "Nhap ten sinh vien can sua: ";
         cin.ignore();
         getline(cin, ten);
         for (thuoctinh &sv : sinhvien)
@@ -339,11 +343,11 @@ inline namespace operation
             if (sv.ten == ten)
             {
                 cout << "Nhap thong tin moi cho sinh vien" << endl;
-                cout << "Ten: ";
+                cout << "Ten: " << endl;
                 getline(cin, sv.ten);
-                cout << "Tuoi: ";
+                cout << "Tuoi: " << endl;
                 cin >> sv.tuoi;
-                cout << "Diem: ";
+                cout << "Diem: " << endl;
                 cin >> sv.diem;
 
                 cout << "Sinh vien da duoc sua." << endl;
@@ -352,6 +356,12 @@ inline namespace operation
         }
 
         cout << "Sua thanh cong" << endl;
+    }
+    void thoat()
+    {
+        cout << "\033c";
+        cout << "Xin chao tam biet va hen gap lai nhe " << endl;
+        exit(0);
     }
     void thaotac()
     {
@@ -383,7 +393,7 @@ inline namespace operation
         else if (n == 7)
             saoluu();
         else if (n == 8)
-            exit(0);
+            thoat();
         else if (n == 9)
             xoamh();
         else
