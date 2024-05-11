@@ -15,21 +15,19 @@ using namespace std;
 #define e 0.000000001
 long long t,n;
 // F5 to run code
+void Solve();
 void Task() {
-    #ifndef ONLINE_JUDGE
-	clock_t begin = clock();
-    #endif
+    clock_t begin = clock();
     ios_base :: sync_with_stdio(false); cin.tie(0); cout.tie(0);
     if (fopen(name ".inp", "r"))
-	{
-		freopen(name ".inp", "r", stdin);
-		freopen(name ".out", "w", stdout);
-	}
+    {
+        freopen(name ".inp", "r", stdin);
+        freopen(name ".out", "w", stdout);
+    }
     Solve();
-    #ifndef ONLINE_JUDGE
-	cerr << "Time: " << (clock() - begin + 1.0) / CLOCKS_PER_SEC << "s";
-    #endif
+    cerr << "Time: " << (clock() - begin + 1.0) / CLOCKS_PER_SEC << "s";
 }
+
 void Solve() {
     
 }
