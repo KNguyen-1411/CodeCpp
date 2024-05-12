@@ -29,7 +29,8 @@ void Task() {
 }
 
 void Solve() {
-    
+    cout<<"Hello"<<endl;
+    cout<<"Khanh nguyen\n";
 }
 int main() {
     Task();
