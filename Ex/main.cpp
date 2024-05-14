@@ -28,8 +28,12 @@ void Task() {
     cerr << "Time: " << (clock() - begin + 1.0) / CLOCKS_PER_SEC << "s";
 }
 
+struct node{
+    int data; 
+    node *next;
+};
 void Solve() {
-    cout<<"Khanh nguyen\n";
+      
 }
 int main() {
     Task();
