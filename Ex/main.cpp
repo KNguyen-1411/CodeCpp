@@ -1,6 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
-#define namebt "test"
+#define name "test"
 #define fr(i,a,b) for (auto i = a ; i < b ;i++)
 #define FR(i,a,b) for (auto i = a ; i < b ;i--)
 #define fx(a) for (auto x:a)
@@ -19,10 +19,10 @@ void Solve();
 void Task() {
     clock_t begin = clock();
     ios_base :: sync_with_stdio(false); cin.tie(0); cout.tie(0);
-    if (fopen(namebt ".inp", "r"))
+    if (fopen(name ".inp", "r"))
     {
-        freopen(namebt ".inp", "r", stdin);
-        freopen(namebt ".out", "w", stdout);
+        freopen(name ".inp", "r", stdin);
+        freopen(name ".out", "w", stdout);
     }
     Solve();
     cerr << "Time: " << (clock() - begin + 1.0) / CLOCKS_PER_SEC << "s";
