@@ -49,7 +49,6 @@ void InsertLast(SList *& F, int x){
 }
 //Hàm chèn một phần tử x vào vị trí trước vị trí p trong danh sách.
 void InsertBeforeP(SList *& F, int x, int p);
-
 //Hàm xóa một phần tử ở vị trí p.
 void Delete(SList *&F, int p);
 //Hàm tính giá trị trung bình của các phần tử trong danh sách.
