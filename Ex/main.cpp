@@ -32,8 +32,48 @@ struct node{
     int data; 
     node *next;
 };
+void IF(node*& head, int n){
+    node *newnode= new node;
+    newnode->data=n;
+    newnode->next=head;
+    head=newnode;
+}
+void IL(node*& head, int n){
+    node *newnode= new node;
+    newnode->data=n;
+    newnode->next=nullptr;
+    if(head==nullptr){
+        head=newnode;
+        return;
+    }
+    node* temp=head;
+    while(temp->next){
+        temp=temp->next;
+    }
+    temp->next=newnode;
+}
+
 void Solve() {
-      
+    node *head=nullptr; 
+    int n,t;
+    cin>>n;
+    fr(i,0,n){
+        cin>>t;
+        if(t%2==0) IL(head,t);
+        else IF(head,t);
+    }
+    node* temp = head;
+    int i=1,z=1+((n-1)/2);
+    cout << temp->data <<endl;
+    while (temp != nullptr) {
+        if(i==z){
+        cout << temp->data << endl;
+        }
+        i++;
+        if (temp->next == nullptr)
+            cout << temp->data << endl;
+        temp = temp->next;
+    }
 }
 int main() {
     Task();
