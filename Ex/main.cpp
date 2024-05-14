@@ -27,53 +27,20 @@ void Task() {
     Solve();
     cerr << "Time: " << (clock() - begin + 1.0) / CLOCKS_PER_SEC << "s";
 }
-
-struct node{
-    int data; 
-    node *next;
-};
-void IF(node*& head, int n){
-    node *newnode= new node;
-    newnode->data=n;
-    newnode->next=head;
-    head=newnode;
-}
-void IL(node*& head, int n){
-    node *newnode= new node;
-    newnode->data=n;
-    newnode->next=nullptr;
-    if(head==nullptr){
-        head=newnode;
-        return;
-    }
-    node* temp=head;
-    while(temp->next){
-        temp=temp->next;
-    }
-    temp->next=newnode;
-}
-
+typedef struct Node{
+    int data;
+    struct Node *next;
+}SList;
+//Hàm chèn một phần tử x và cuối danh sách.
+void InsertLast(SList *& F, int x);
+//Hàm chèn một phần tử x vào vị trí trước vị trí p trong danh sách.
+void InsertBeforeP(SList *& F, int x, int p);
+//Hàm xóa một phần tử ở vị trí p.
+void Delete(SList *&F, int p);
+//Hàm tính giá trị trung bình của các phần tử trong danh sách.
+float Average(SList *F);
 void Solve() {
-    node *head=nullptr; 
-    int n,t;
-    cin>>n;
-    fr(i,0,n){
-        cin>>t;
-        if(t%2==0) IL(head,t);
-        else IF(head,t);
-    }
-    node* temp = head;
-    int i=1,z=1+((n-1)/2);
-    cout << temp->data <<endl;
-    while (temp != nullptr) {
-        if(i==z){
-        cout << temp->data << endl;
-        }
-        i++;
-        if (temp->next == nullptr)
-            cout << temp->data << endl;
-        temp = temp->next;
-    }
+    
 }
 int main() {
     Task();
