@@ -32,9 +32,24 @@ typedef struct Node{
     struct Node *next;
 }SList;
 //Hàm chèn một phần tử x và cuối danh sách.
-void InsertLast(SList *& F, int x);
+void InsertLast(SList *& F, int x){
+    Node *newnode= new Node;
+    newnode->data=x;
+    newnode->next=nullptr;
+    if(F==nullptr) {
+        F=newnode;
+        return;
+    }
+    Node *p=F;
+    while (p->next)
+    {
+        p=p->next;
+    }
+    p->next=newnode;
+}
 //Hàm chèn một phần tử x vào vị trí trước vị trí p trong danh sách.
 void InsertBeforeP(SList *& F, int x, int p);
+
 //Hàm xóa một phần tử ở vị trí p.
 void Delete(SList *&F, int p);
 //Hàm tính giá trị trung bình của các phần tử trong danh sách.
