@@ -27,153 +27,129 @@ void Task() {
     Solve();
     cerr << "Time: " << (clock() - begin + 1.0) / CLOCKS_PER_SEC << "s";
 }
-struct SinhVien{
-    string msv;
-    string hoten;
-    string ten(string hoten){
-        int i=hoten.length();
-        for(;hoten[i]!=' ';i--);
-        string ten=hoten.substr(i);
-        return ten;
-    }
-    struct NgaySinh{
-        int dd,mm,yy;
-    };
-    NgaySinh ns;
-    int tuoi;
-    size_t Tuoi(NgaySinh ns){
-        return 2024-ns.yy;
-    }
-    float diem,diem1,diem2;
-    SinhVien *next;
+//Node
+struct Node{
+    int data;
+    Node* next;
 };
-typedef struct SinhVien * sv;
-sv crsv(string msv,string ht,int tuoi,float diem){
-    sv p= new SinhVien;
-    p->msv=msv;
-    p->hoten=ht;
-    p->tuoi=tuoi;
-    p->diem=diem;
-    p->next=NULL;
+//define con trỏ Node là node
+typedef struct Node * node;
+//tạo node mới
+node crnode(int x){
+    node p = new Node;
+    p->data = x;
+    p->next = NULL;
     return p;
 }
-size_t Size(auto head){
+//dem phần tử
+size_t Size(node head){
     size_t n = 0;
     while(head != NULL){
         n++;
         head=head->next;
     }
+    return n;
 }
-void Deletesv(SinhVien* &dssv, string msv) {
-    sv p = dssv;
-    sv truoc = nullptr,sau = dssv;
-    if (p != nullptr && p->msv == msv) {
-        dssv = p->next;
-        delete p;
+//chèn đầu
+void insF(node &head, int x){
+    node tmp=crnode(x);
+    if(head==NULL){
+        head=tmp;
+    }else{
+        tmp->next = head;
+        head=tmp;
+    }
+}
+//chèn cuối
+void insL(node &head, int x){
+    node tmp=crnode(x);
+    if(head==NULL){
+        head=tmp;
+    }else{
+        node p=head;
+        while(p->next){
+            p=p->next;
+        }
+        p->next=tmp;
+    }
+}
+//chèn trước p
+void insP(node &head, int x,int p){
+    int n=Size(head);
+    if(p<=0||p>=n+1){
+        cout<<"Loi"<<endl;
         return;
     }
-    while (sau != nullptr) {
-        if (sau->msv == msv) {
-            truoc->next = sau->next;
-            delete sau;
-            return;
-        }
-        truoc = sau;
-        sau = sau->next;
+    if(n==1){
+        insF(head,x);
     }
-    cout << "Không tìm thấy sinh viên có mã số " << msv << endl;
+    else if(n==p+1){
+        insL(head,x);
+    }
+    else{
+        node ct=head;
+        for(int i=1;i<p-1;i++){
+            ct=ct->next;
+        }
+        node tmp=crnode(x);
+        tmp->next=ct->next;
+        ct->next=tmp;
+    }
 }
-void inssv(sv &dssv){
-    string a,b;
-    int tuoi;
-    float diem;
-    cin>>a;
-    cin.ignore();
-    getline(cin,b);
-    cin>>tuoi;
-    cin>>diem;
-    sv tmp=crsv(a,b,tuoi,diem);
-    if(dssv==NULL){
-        dssv=tmp;
+//xóa đầu
+void DeleteF(node &head){
+    if(head==NULL){
+        return;
+    }
+    else{
+        head=head->next;
+    }
+}
+//Xóa cuối
+void DeleteL(node &head){
+    if(head==NULL){
+        return;
     }else{
-        tmp->next = dssv;
-        dssv=tmp;
+        node truoc=NULL,sau=head;
+        while(sau->next){
+            truoc=sau;
+            sau=sau->next;
+        }
+        if(truoc==NULL){
+            head=NULL;
+        }
+        else{
+            truoc->next=NULL;
+        }
+    }
+}
+//xóa vị trí p
+void DeleteP(node &head,int p){
+    if(p<=0||p>Size(head)){
+        return;
+    }
+    node truoc=NULL,sau=head;
+    for(int i=0;i<p-1;i++){
+        truoc=sau;
+        sau=sau->next;
+    }
+    if(truoc==NULL){
+        head=head->next;
+    }else{
+        truoc->next=sau->next;
     }
 }
 //in ra
-void printsv(sv head){
-    const int WidthSTT = 5, Width = 30, WidthTuoi = 10, WidthDiem = 10;
-    cout << endl;
-    cout << left << setw(WidthSTT) << "| MSV";
-    cout << left << setw(Width) << "| Ho Ten";
-    cout << left << setw(WidthTuoi) << "| Tuoi";
-    cout << left << setw(WidthDiem) << "| Diem    |" << endl;
-    cout << setfill('-') << setw(WidthSTT + Width + WidthTuoi + WidthDiem + 2) << "" << setfill(' ') << endl;
-    for (int i = 0; i < Size(head); ++i)
-    {
-        cout << "| " << left << setw(WidthSTT - 2) << head->msv;
-        cout << "| " << left << setw(Width - 2) << head->hoten;
-        cout << "| " << left << setw(WidthTuoi - 2) << head->tuoi;
-        cout << "| " << left << setw(WidthDiem - 2) << head->diem << "|" << endl
-             << endl;
+void in(node head){
+    while(head != NULL){
+        cout << head->data << " ";
         head = head->next;
     }
-    // msv //hoten //Tuoi //diem
-}
-void nhap(sv &dssv){
-    ifstream inputFile;
-    inputFile.open("text .txt");
-    if (inputFile.is_open()) {
-        string line;
-        getline(inputFile, line);
-    } else {
-        cout << "Không thể mở file." << endl;
-    }
-}
-void thaotac(sv dssv){
-    cout << "Danh sach thao tac:" << endl
-         << "1 - In danh sach sv" << endl
-         << "2 - Them" << endl
-         << "3 - Sua" << endl
-         << "4 - Xoa" << endl
-         << "5 - Tim kiem" << endl
-         << "6 - Sap xep" << endl
-         << "7 - Sao luu" << endl
-         << "8 - Thoat" << endl
-         << "9 - Xoa man hinh" << endl
-         << "Nhap lenh: " << endl;
-    int n;
-    cin>>n;
-    switch (n)
-    {
-    case '1':
-        printsv(dssv);
-        break;
-    case '2':
-        inssv(dssv);
-        break;
-    case '3':
-        break;
-    case '4':
-        break;
-    case '5':
-        break;
-    case '6':
-        break;
-    case '7':
-        break;
-    case '8':
-        break;
-    case '9':
-        break;
-    default:
-        thaotac(dssv);
-        break;
-    }
+    cout << endl;
 }
 void Solve(){
     //khoi tao node
-    sv dssv=NULL;
+    node head=NULL;
 
 }
 int main() {

@@ -48,6 +48,7 @@ size_t Size(node head){
         n++;
         head=head->next;
     }
+    return n;
 }
 //chèn đầu
 void insF(node &head, int x){
