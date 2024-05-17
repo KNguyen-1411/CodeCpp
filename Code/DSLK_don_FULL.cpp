@@ -11,9 +11,9 @@ using namespace std;
 #define fi first
 #define se second
 #define ll long long
-#define m 1000000007
-#define e 0.000000001
 long long t,n;
+// #define m 1000000007
+// #define e 0.000000001
 // F5 to run code
 void Solve();
 void Task() {
@@ -141,15 +141,16 @@ void DeleteP(node &head,int p){
 }
 //in ra
 void in(node head){
-    while(head->next){
-        cout<<head->data<<" ";
-        head=head->next;
+    while(head != NULL){
+        cout << head->data << " ";
+        head = head->next;
     }
+    cout << endl;
 }
 void Solve(){
     //khoi tao node
     node head=NULL;
-
+ 
 }
 int main() {
     Task();
