@@ -150,7 +150,7 @@ void in(node head){
 void Solve(){
     //khoi tao node
     node head=NULL;
-
+    
 }
 int main() {
     Task();
