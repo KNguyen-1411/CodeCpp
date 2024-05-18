@@ -11,9 +11,9 @@ using namespace std;
 #define fi first
 #define se second
 #define ll long long
-long long t,n;
 // #define m 1000000007
 // #define e 0.000000001
+long long t,n;
 // F5 to run code
 void Solve();
 void Task() {
@@ -27,130 +27,132 @@ void Task() {
     Solve();
     cerr << "Time: " << (clock() - begin + 1.0) / CLOCKS_PER_SEC << "s";
 }
-//Node
-struct Node{
-    int data;
-    Node* next;
-};
-//define con trỏ Node là node
-typedef struct Node * node;
-//tạo node mới
-node crnode(int x){
-    node p = new Node;
-    p->data = x;
-    p->next = NULL;
-    return p;
+string addstring(string a,string b){
+    string s;
+    int sa = a.length() - 1, sb = b.length() - 1, nho = 0;
+    while (sa >= 0 || sb >= 0 ) {
+        int so_a = (sa >= 0) ? a[sa--] - '0' : 0;
+        int so_b = (sb >= 0) ? b[sb--] - '0' : 0;
+        int sum = so_a + so_b + nho;
+        nho = sum / 10;
+        s = to_string(sum % 10) + s;
+    }
+    return s;
 }
-//dem phần tử
-size_t Size(node head){
-    size_t n = 0;
-    while(head != NULL){
-        n++;
-        head=head->next;
+string add(string a, string b) {
+    int m = a.length(), n = b.length();
+    string result = "";
+    int nho = 0;
+
+    // Thực hiện phép cộng từ phải sang trái
+    for (int i = m - 1, j = n - 1; i >= 0 || j >= 0; i--, j--) {
+        int x = (i >= 0) ? a[i] - '0' : 0;
+        int y = (j >= 0) ? b[j] - '0' : 0;
+        int sum = x + y + nho;
+        result = to_string(sum % 10) + result;
+        nho = sum / 10;
     }
-    return n;
+
+    // Xử lý trường hợp có số nhớ ở cuối
+    if (nho > 0) {
+        result = to_string(nho) + result;
+    }
+
+    return result;
 }
-//chèn đầu
-void insF(node &head, int x){
-    node tmp=crnode(x);
-    if(head==NULL){
-        head=tmp;
-    }else{
-        tmp->next = head;
-        head=tmp;
-    }
-}
-//chèn cuối
-void insL(node &head, int x){
-    node tmp=crnode(x);
-    if(head==NULL){
-        head=tmp;
-    }else{
-        node p=head;
-        while(p->next){
-            p=p->next;
-        }
-        p->next=tmp;
-    }
-}
-//chèn trước p
-void insP(node &head, int x,int p){
-    int n=Size(head);
-    if(p<=0||p>=n+1){
-        cout<<"Loi"<<endl;
-        return;
-    }
-    if(n==1){
-        insF(head,x);
-    }
-    else if(n==p+1){
-        insL(head,x);
-    }
-    else{
-        node ct=head;
-        for(int i=1;i<p-1;i++){
-            ct=ct->next;
-        }
-        node tmp=crnode(x);
-        tmp->next=ct->next;
-        ct->next=tmp;
-    }
-}
-//xóa đầu
-void DeleteF(node &head){
-    if(head==NULL){
-        return;
-    }
-    else{
-        head=head->next;
-    }
-}
-//Xóa cuối
-void DeleteL(node &head){
-    if(head==NULL){
-        return;
-    }else{
-        node truoc=NULL,sau=head;
-        while(sau->next){
-            truoc=sau;
-            sau=sau->next;
-        }
-        if(truoc==NULL){
-            head=NULL;
-        }
-        else{
-            truoc->next=NULL;
+string multiply(string a, string b) {
+    int m = a.length(), n = b.length();
+    vector<int> temp(m + n, 0);
+
+    // Thực hiện phép nhân từng chữ số của a với từng chữ số của b
+    for (int i = m - 1; i >= 0; i--) {
+        for (int j = n - 1; j >= 0; j--) {
+            int product = (a[i] - '0') * (b[j] - '0');
+            int sum = temp[i + j + 1] + product;
+            temp[i + j + 1] = sum % 10;
+            temp[i + j] += sum / 10;
         }
     }
+
+    // Xây dựng chuỗi kết quả từ mảng temp
+    string result = "";
+    int i = 0;
+    while (i < temp.size() && temp[i] == 0) {
+        i++;
+    }
+    for (; i < temp.size(); i++) {
+        result += to_string(temp[i]);
+    }
+
+    return result.empty() ? "0" : result;
 }
-//xóa vị trí p
-void DeleteP(node &head,int p){
-    if(p<=0||p>Size(head)){
-        return;
+string divide(string dividend, string divisor) {
+    string result = "";
+    int n = dividend.length();
+    int m = divisor.length();
+
+    // Xử lý trường hợp divisor = 0
+    if (divisor == "0") {
+        return "Error: division by zero";
     }
-    node truoc=NULL,sau=head;
-    for(int i=0;i<p-1;i++){
-        truoc=sau;
-        sau=sau->next;
+
+    // Xử lý trường hợp dividend < divisor
+    if (n < m || (n == m && dividend < divisor)) {
+        return "0";
     }
-    if(truoc==NULL){
-        head=head->next;
-    }else{
-        truoc->next=sau->next;
+
+    // Thực hiện phép chia
+    int index = 0;
+    while (index < n) {
+        string temp = "";
+        int i;
+        for (i = index; i < n && temp + dividend[i] < divisor; i++) {
+            temp += dividend[i];
+        }
+        index = i;
+        int q = 0;
+        while (temp >= divisor) {
+            temp = subtract(temp, divisor);
+            q++;
+        }
+        result += to_string(q);
     }
+
+    // Xóa các chữ số 0 ở đầu
+    while (result[0] == '0' && result.length() > 1) {
+        result.erase(0, 1);
+    }
+
+    return result;
 }
-//in ra
-void in(node head){
-    while(head != NULL){
-        cout << head->data << " ";
-        head = head->next;
+string subtract(string a, string b) {
+    int m = a.length(), n = b.length();
+    string result = "";
+    int nho = 0;
+
+    // Thực hiện phép trừ từ phải sang trái
+    for (int i = m - 1, j = n - 1; i >= 0 || j >= 0; i--, j--) {
+        int x = (i >= 0) ? a[i] - '0' : 0;
+        int y = (j >= 0) ? b[j] - '0' : 0;
+        int diff = x - y + nho;
+        result = to_string(diff % 10) + result;
+        nho = (diff < 0) ? -1 : 0;
     }
-    cout << endl;
+
+    // Xử lý trường hợp kết quả là số âm
+    if (nho == -1) {
+        result = "-" + result;
+    }
+
+    // Loại bỏ các chữ số 0 ở đầu
+    while (result.length() > 1 && result[0] == '0') {
+        result.erase(0, 1);
+    }
+
+    return (result.empty()) ? "0" : result;
 }
-void Solve(){
-    //khoi tao node
-    node head=NULL;
-    
+void Solve() {
+    cout<<multiply("20","21");
 }
 int main() {
     Task();
