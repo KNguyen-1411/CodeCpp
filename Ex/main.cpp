@@ -119,7 +119,7 @@ void deK(node &head,int k){
         return;
     }
      node p = head;
-    while (p->next) {
+    while (p->next!=NULL) {
         if (p->next->data == k) {
             node temp = p->next;
             p->next = temp->next;
