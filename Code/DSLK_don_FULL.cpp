@@ -130,6 +130,19 @@ void deK(node &head,int k){
     }
     
 }
+void  Reverse(node &F){
+    node prev = nullptr;
+    node curr = F;
+    node next = nullptr;
+
+    while (curr != nullptr) {
+        next = curr->next;
+        curr->next = prev;
+        prev = curr;
+        curr = next;
+    }
+    F = prev;
+}
 void Solve() {
     int n;
     node head=NULL;
