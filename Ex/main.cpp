@@ -26,24 +26,32 @@ void Task(){
     cerr << "Time: " << (clock() - begin + 1.0) / CLOCKS_PER_SEC << "s";
     #endif
 }
-struct hp{
-    string mhp;
-    string ten;
-    int st;
+struct node {
+    int i, c, p;
 };
-void Solve(){
-    int n;
-    cin>>n;
-    cin.ignore();
-    hp luu[n];
 
-    //nhap
-    string a,b;
-    int x;
-    for(int i=0;i<n;i++){
-        getline(cin,a,',');
-        getline(cin,b,',');
-        cin>>x;
+bool kt(node a, node b) {
+    if(a.p == b.p) {
+        return a.i < b.i;
+    }
+    return a.p > b.p;
+}
+
+void Solve() {
+    int n;
+    cin >> n;
+    node a[n];
+    long long sumhang = 0, sumgt = 0;
+    for (int i = 0; i < n; i++) {
+        cin >> a[i].i >> a[i].c >> a[i].p;
+        sumhang += a[i].c;
+        sumgt += a[i].p * a[i].c;
+    }
+    sort(a, a + n, kt);
+    cout << sumhang << endl << sumgt << endl;
+    for (int i = 0; i < n; i++) {
+        cout << a[i].i;
+        if (i != n - 1) cout << " ";
     }
 }
 int main(){
