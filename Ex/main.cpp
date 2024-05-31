@@ -28,7 +28,7 @@ void Task(){
 }
 
 void Solve(){
-    
+    cout<<"Hello"<<endl;
 }
 int main(){
     Task();
