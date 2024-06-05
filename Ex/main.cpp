@@ -27,7 +27,7 @@ void Task(){
     #endif
 }
 void Solve(){
-       
+    cout<<"Kn";
 }
 int main(){
     Task();
