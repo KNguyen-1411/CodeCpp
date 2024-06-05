@@ -27,11 +27,7 @@ void Task(){
     #endif
 }
 void Solve(){
-    cin >> t;
-    while (t--){
-        cin >> n;
-        cout << (n + 1) / 2 << '\n';
-    }
+    
 }
 int main(){
     Task();
