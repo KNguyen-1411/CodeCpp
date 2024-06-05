@@ -27,7 +27,6 @@ void Task(){
     #endif
 }
 void Solve(){
-    cout<<"Hello"<<endl;
        
 }
 int main(){
