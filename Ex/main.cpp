@@ -91,6 +91,15 @@ void ssx(){
         cout<<ma<<endl;
     }
 }
+class Node{
+public:
+    int data;
+    Node* next;
+    Node(int n){
+        this->data=data;
+        this->next=NULL;
+    }
+};
 void Solve(){
     
 }
