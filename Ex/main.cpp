@@ -101,7 +101,6 @@ public:
     }
 };
 void Solve(){
-    cout<<"hello";
 }
 int main(){
     Task(); 
