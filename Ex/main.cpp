@@ -30,8 +30,8 @@ void Task(){
     cerr << "Time: " << (clock() - begin + 1.0) / CLOCKS_PER_SEC << "s";
 }
 void Solve(){
-
+    
 }
 int main(){
-    Task();
+    Task(); 
 }
